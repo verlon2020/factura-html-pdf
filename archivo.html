@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Factura Blanca Camacho</title>
+  <style>
+    :root {
+      --primary-color: #6a5acd;
+      --secondary-color: #9370db;
+      --accent-color: #ff7f50;
+      --text-color: #333;
+      --light-bg: #f9f9ff;
+      --border-radius: 8px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: var(--text-color);
+      background-color: #fff;
+    }
+
+    #invoice-content {
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: white;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--accent-color);
+      padding-bottom: 10px;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .info-box {
+      width: 48%;
+      background: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 10px;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--light-bg);
+    }
+
+    .total-row {
+      font-weight: bold;
+      background-color: #e6e6fa !important;
+    }
+
+    .amount-in-words {
+      margin: 25px 0;
+      padding: 10px;
+      background-color: var(--light-bg);
+      border-left: 4px solid var(--accent-color);
+      font-style: italic;
+      border-radius: var(--border-radius);
+    }
+
+    .highlight {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .btn-group {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .download-btn {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .download-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    @media print {
+      .download-btn, .btn-group {
+        display: none;
+      }
+      body, html {
+        margin: 0;
+        padding: 0;
+      }
+      #invoice-content {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div id="invoice-content">
+    <h1>CUENTA DE COBRO</h1>
+
+    <div class="flex">
+      <div><strong>FECHA:</strong> <span class="highlight" contenteditable="true">07.06.2025</span></div>
+      <div><strong>N°:</strong> <span class="highlight" contenteditable="true">24</span></div>
+    </div>
+
+    <div class="flex" style="margin-top: 20px;">
+      <div class="info-box">
+        <strong>REMITENTE</strong><br/>
+        <div contenteditable="true">BLANCA ELCIDA CAMACHO RAMIREZ</div>
+        <div contenteditable="true">NIT: 63.490.851</div>
+        <div contenteditable="true">RÉGIMEN SIMPLIFICADO</div>
+        <div contenteditable="true">CL 2#-7A 13-SANTA ANA</div>
+        <div contenteditable="true">Tel: 3186487076</div>
+      </div>
+      <div class="info-box">
+        <strong>CLIENTE</strong><br/>
+        <div contenteditable="true">TU MASCOTA SPA</div>
+        <div contenteditable="true">Kra 36 #52-135</div>
+        <div contenteditable="true">DIRECCIÓN: Kra 22-36 52-135</div>
+        <div contenteditable="true">CIUDAD: Bucaramanga, Santander</div>
+        <div contenteditable="true">TELÉFONO:</div>
+        <div>FORMA DE PAGO: <span class="highlight" contenteditable="true">Efectivo</span></div>
+        <div>VENDEDOR: <span class="highlight" contenteditable="true"></span></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Cantidad</th>
+          <th>Descripción Artículo</th>
+          <th>Vr. Unit</th>
+          <th>Vr. Total</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-articulos">
+        <tr>
+          <td contenteditable="true">2</td>
+          <td contenteditable="true">Jardineras para Robada-L</td>
+          <td contenteditable="true">$28.000</td>
+          <td contenteditable="true">$56.000</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Vestido Blanca nieces</td>
+          <td contenteditable="true">$28.000</td>
+          <td contenteditable="true">$28.000</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Cambios Hembra XS</td>
+          <td contenteditable="true">$14.000</td>
+          <td contenteditable="true">$14.000</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Cambios Hembra S</td>
+          <td contenteditable="true">$14.000</td>
+          <td contenteditable="true">$14.000</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Cambios Hembra M</td>
+          <td contenteditable="true">$15.000</td>
+          <td contenteditable="true">$15.000</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">1</td>
+          <td contenteditable="true">Cambios Hembra L</td>
+          <td contenteditable="true">$15.000</td>
+          <td contenteditable="true">$15.000</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2"></td>
+          <td>Sub Total:</td>
+          <td contenteditable="true">$142.000</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2"></td>
+          <td>TOTAL:</td>
+          <td contenteditable="true">$142.000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="amount-in-words">
+      Pagar la suma de: <span class="highlight" contenteditable="true">Ciento Cuarenta y Dos Mil pesos ($142.000)</span>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="download-btn" onclick="agregarFila()">+ Agregar fila</button>
+    <button class="download-btn" onclick="eliminarFila()">- Eliminar fila</button>
+    <button class="download-btn" onclick="descargarPDF()">📄 Descargar PDF</button>
+  </div>
+
+  <script>
+    function agregarFila() {
+      const tabla = document.getElementById("tabla-articulos");
+      const filas = tabla.querySelectorAll("tr");
+      const nueva = document.createElement("tr");
+      nueva.innerHTML = `
+        <td contenteditable="true">1</td>
+        <td contenteditable="true">Nuevo artículo</td>
+        <td contenteditable="true">$0</td>
+        <td contenteditable="true">$0</td>
+      `;
+      tabla.insertBefore(nueva, filas[filas.length - 2]);
+    }
+
+    function eliminarFila() {
+      const tabla = document.getElementById("tabla-articulos");
+      const filas = tabla.querySelectorAll("tr");
+      if (filas.length > 4) {
+        tabla.removeChild(filas[filas.length - 3]);
+      }
+    }
+
+    function descargarPDF() {
+      const element = document.getElementById('invoice-content');
+      const opt = {
+        margin: [0.4, 0.4, 0.4, 0.4],
+        filename: 'Cuenta_de_Cobro_TU_MASCOTA_SPA.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+
+    
+  </script>
+</body>
+</html>
